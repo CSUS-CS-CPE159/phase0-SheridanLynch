@@ -1,4 +1,30 @@
-$ spede-run -d
+01:59:43 $ cd phase0-SheridanLynch
+-[spede] ~/phase0-SheridanLynch (main=)
+01:59:51 $ ls
+01-hello-world	02-debugging  part3.txt  part4.txt  README.md
+-[spede] ~/phase0-SheridanLynch (main=)
+01:59:55 $ make
+make: *** No targets specified and no makefile found.  Stop.
+![spede] ~/phase0-SheridanLynch (main=)
+01:59:56 $ cd 01-hello-world
+-[spede] ~/phase0-SheridanLynch/01-hello-world (main=)
+02:00:05 $ make
+Done linking "build/RandomOs.dli" (with GDB enabled) at 1m.
+-[spede] ~/phase0-SheridanLynch/01-hello-world (main=)
+02:00:07 $ spede-target
+Launching SPEDE target to run in the background
+-[spede] ~/phase0-SheridanLynch/01-hello-world (main=)
+02:00:13 $ spede-run
+The SPEDE Target will be reset, are you sure? (y/n) y
+Resetting the SPEDE Target...
+Downloading image 'build/RandomOs.dli' to SPEDE Target via /dev/pts/1...
+File type is 'ELF'
+Total blocks to download:  0x8a  (128 bytes each)
+
+Load Successful ; Code loaded at 0x0x101000 (2216 bytes/sec)
+Executing the image 'build/RandomOs.dli' on the SPEDE Target
+-[spede] ~/phase0-SheridanLynch/01-hello-world (main=)
+02:00:38 $ spede-run -d
 The SPEDE Target will be reset, are you sure? (y/n) y
 Resetting the SPEDE Target...
 Downloading image 'build/RandomOs.dli' to SPEDE Target via /dev/pts/1...
@@ -16,10 +42,15 @@ Temporary breakpoint 1 at 0x101183: file src/hello.c, line 5.
 
 Temporary breakpoint 1, main () at src/hello.c:5
 5	    printf("Hello, world!\n");
-SPEDE GDB$ continue
-Continuing.
+SPEDE GDB$ run
 Hello, world!
 Welcome to RandomOs!
 [Inferior 1 (Remote target) exited normally]
-SPEDE GDB$ 
+SPEDE GDB$ quit
+-[spede] ~/phase0-SheridanLynch/01-hello-world (main=)
+02:01:37 $ spede-target -q
+The SPEDE Target has quit. Exiting...
+-[spede] ~/phase0-SheridanLynch/01-hello-world (main=)
+02:01:46 $ 
+
 
