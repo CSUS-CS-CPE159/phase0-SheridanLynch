@@ -1,0 +1,111 @@
+#Sheridan Lynch
+
+Load Successful ; Code loaded at 0x0x101000 (2104 bytes/sec)
+Executing the image 'build/RandomOS.dli' on the SPEDE Target with GDB Enabled
+Launching GDB...
+Reading symbols from build/RandomOS.dli...
+Expanding full symbols from build/RandomOS.dli...
+Remote debugging using /dev/pts/1
+0x0010267d in breakpoint ()
+Temporary breakpoint 1 at 0x101208: file src/main.c, line 39.
+
+Temporary breakpoint 1, main () at src/main.c:39
+39	    char buf[128] = {0};
+SPEDE GDB$ break strlen
+Breakpoint 2 at 0x101178: file src/main.c, line 9.
+SPEDE GDB$ info break
+Num     Type           Disp Enb Address    What
+2       breakpoint     keep y   0x00101178 in strlen at src/main.c:9
+SPEDE GDB$ continue
+Continuing.
+Hello, World!
+Welcome to RandomOS!
+
+Breakpoint 2, strlen (str=0x104203 "Hello, World!\n") at src/main.c:9
+9	    size_t length = 0;
+SPEDE GDB$ backtrace
+#0  strlen (str=0x104203 "Hello, World!\n") at src/main.c:9
+#1  0x001011c0 in puts (str=0x104203 "Hello, World!\n") at src/main.c:28
+#2  0x0010125f in main () at src/main.c:46
+SPEDE GDB$ info break
+Num     Type           Disp Enb Address    What
+2       breakpoint     keep y   0x00101178 in strlen at src/main.c:9
+	breakpoint already hit 1 time
+SPEDE GDB$ delete 2
+SPEDE GDB$ info break
+No breakpoints or watchpoints.
+SPEDE GDB$ break main.c:50
+Breakpoint 3 at 0x1012a3: file src/main.c, line 50.
+SPEDE GDB$ break main.c:52
+Breakpoint 4 at 0x1012b5: file src/main.c, line 52.
+SPEDE GDB$ info break
+Num     Type           Disp Enb Address    What
+3       breakpoint     keep y   0x001012a3 in main at src/main.c:50
+4       breakpoint     keep y   0x001012b5 in main at src/main.c:52
+SPEDE GDB$ continue
+Continuing.
+The buffer size is 21 bytes
+
+Breakpoint 3, main () at src/main.c:50
+50	    puts(buf);
+SPEDE GDB$ info args
+No arguments.
+SPEDE GDB$ print buf
+$1 = "welcome to RandomOS!\n", '\000' <repeats 106 times>
+SPEDE GDB$ set buf[0] = 'W'
+SPEDE GDB$ print buf
+$2 = "Welcome to RandomOS!\n", '\000' <repeats 106 times>
+SPEDE GDB$ continue
+Continuing.
+
+Breakpoint 4, main () at src/main.c:52
+52	    printf("CPE/CSC 159 for Fall %d will be fun!\n", year);
+SPEDE GDB$ info args
+No arguments.
+SPEDE GDB$ print year
+$3 = 0x7b2
+SPEDE GDB$ print /d year
+$4 = 1970
+SPEDE GDB$ set year = 2025
+SPEDE GDB$ print year
+$5 = 0x2025
+SPEDE GDB$ print /d year
+$6 = 8229
+SPEDE GDB$ set year = 2025.
+SPEDE GDB$ print year
+$7 = 0x7e9
+SPEDE GDB$ print /d year
+$8 = 2025
+SPEDE GDB$ continue
+Continuing.
+CPE/CSC 159 for Fall 2025 will be fun!
+[Inferior 1 (Remote target) exited normally]
+SPEDE GDB$ quit
+-[spede] ~/phase0-SheridanLynch/02-debugging {main *%=}
+00:34:13 $ spede-run -d
+The SPEDE Target will be reset, are you sure? (y/n) y
+Resetting the SPEDE Target...
+Downloading image 'build/RandomOS.dli' to SPEDE Target via /dev/pts/1...
+File type is 'ELF'
+Total blocks to download:  0x83  (128 bytes each)
+
+Load Successful ; Code loaded at 0x0x101000 (2104 bytes/sec)
+Executing the image 'build/RandomOS.dli' on the SPEDE Target with GDB Enabled
+Launching GDB...
+Reading symbols from build/RandomOS.dli...
+Expanding full symbols from build/RandomOS.dli...
+Remote debugging using /dev/pts/1
+0x0010267d in breakpoint ()
+Temporary breakpoint 1 at 0x101208: file src/main.c, line 39.
+
+Temporary breakpoint 1, main () at src/main.c:39
+39	    char buf[128] = {0};
+SPEDE GDB$ run
+Hello, World!
+Welcome to RandomOS!
+The buffer size is 21 bytes
+CPE/CSC 159 for Fall 1970 will be fun!
+[Inferior 1 (Remote target) exited normally]
+SPEDE GDB$ quit
+-[spede] ~/phase0-SheridanLynch/02-debugging {main *%=}
+

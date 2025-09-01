@@ -6,8 +6,13 @@
  * @return value indicating the length of the string
  */
 int strlen(char *str) {
-    //Implement me!
-    return 0;
+    size_t length = 0;
+
+    while(str[length])
+    {
+        length++;
+    }
+    return length;
 }
 
 /**
@@ -15,7 +20,7 @@ int strlen(char *str) {
  * @param str pointer to the string to print
  */
 void puts(char *str) {
-    if (str) {
+    if (str == NULL) {
         printf("NULL pointer!\n");
         return;
     }
@@ -34,9 +39,8 @@ void main(void) {
     char buf[128] = {0};
     int year = 1970;
 
-    *((char *) 0xB8000) = 'A';
-
-    printf("Hello, world!\n");
+    //TODO: Implement strlen
+    printf("Hello, World!\n");
     printf("Welcome to %s!\n", OS_NAME);
 
     puts("Hello, World!\n");
@@ -45,5 +49,5 @@ void main(void) {
     printf("The buffer size is %d bytes\n", strlen(buf));
     puts(buf);
 
-    printf("CPE/CSC 159 for Spring/Fall %d will be fun!\n", year);
+    printf("CPE/CSC 159 for Fall %d will be fun!\n", year);
 }
